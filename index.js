@@ -13,7 +13,7 @@ const io = new Server(server, {
   cors: {
     origin: '*',
     allowedHeaders: ['sa-client'],
-    credentials: true,
+    credentials: false,
   },
 });
 
@@ -45,6 +45,8 @@ io.on('connection', (socket) => {
   });
   socket.on('message', (author, message) => {
     console.log(`${author}:${message}`);
+    socket.broadcast.to(roomId).emit('servver-message', author, message);
+    socket.emit('server-message', author, message);
   });
   socket.on('create-room', (newRoomId) => {
     console.log(`${newRoomId} room created`);
