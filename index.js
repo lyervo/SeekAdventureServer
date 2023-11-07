@@ -3,11 +3,15 @@ import { createServer } from 'node:http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 
+if (process.env.CORS_URL === undefined) {
+  process.env.CORS_URL = 'localhost:3000';
+}
+
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.CORS_URL,
     allowedHeaders: ['sa-client'],
     credentials: true,
   },
