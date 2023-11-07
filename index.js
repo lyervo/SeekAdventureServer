@@ -16,6 +16,9 @@ const io = new Server(server, {
     credentials: true,
   },
 });
+
+console.log('the cors address is ' + process.env.CORS_URL);
+
 const port = 3001;
 const SOCKET_TIMEOUT = 15000;
 
